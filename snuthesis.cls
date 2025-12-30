@@ -381,8 +381,8 @@
 \def\departmentko#1{\gdef\@snu@department@ko{#1}}
 \def\departmenten#1{\gdef\@snu@department@en{#1}}
 \def\@snu@department@ko{컴퓨터 공학부}
-\def\@snu@department@en{DEPARTMENT OF COMPUTER SCIENCE AND\\%
-	ENGINEERING}
+\def\@snu@department@en{Department of Computer Science and\\%
+	Engineering}
 %\@onlypreamble{\departmentko}
 %\@onlypreamble{\departmenten}
 
@@ -523,7 +523,7 @@
 				\@authoralt
 			\else
 				\fontsize{14pt}{14pt}\selectfont
-				\@snu@department@en\\
+				\MakeUppercase{\@snu@department@en}\\
 				\@snu@school@en\\
 				\@snu@school@ensub \\
 				\vspace{1cm}\nointerlineskip
