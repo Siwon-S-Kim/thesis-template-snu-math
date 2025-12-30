@@ -489,10 +489,10 @@
 		\else % 대학원
 			\fontsize{14pt}{14pt}\selectfont
 			\if@snu@ms
-				\@snu@koen{\@snu@academic@ko석사학위논문}%
+				\@snu@koen{\@snu@academic@ko석사 학위논문}%
 				{M.S. THESIS}\\
 			\else
-				\@snu@koen{\@snu@academic@ko박사학위논문}%
+				\@snu@koen{\@snu@academic@ko박사 학위논문}%
 				{Ph.D. DISSERTATION}\\
 			\fi
 			\vspace{2cm}\nointerlineskip
@@ -623,7 +623,7 @@
 			\vspace{5mm}\nointerlineskip
 			\fontsize{16pt}{16pt}\selectfont
 			이 논문을 %
-			\@snu@academic@ko\@snu@msphd{석사}{박사}%
+			\@snu@academic@ko\@snu@msphd{석사}{박사} %
 			학위논문으로 제출함\\
 			\vspace{5mm}\nointerlineskip
 			\fontsize{14pt}{14pt}\selectfont
@@ -639,7 +639,7 @@
 			\@authoralt\\
 			\vspace{1cm}\nointerlineskip
 			\@authoralt의 %
-			\@snu@academic@ko\@snu@msphd{석사}{박사} %
+			\@snu@msphd{석사}{박사} %
 			학위논문을 인준함\\
 			\vspace{5mm}\nointerlineskip
 			\fontsize{14pt}{14pt}\selectfont
