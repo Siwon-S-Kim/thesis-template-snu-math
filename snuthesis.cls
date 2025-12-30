@@ -503,7 +503,7 @@
 			\fi
 			\vspace{2cm}\nointerlineskip
 			\fontsize{22pt}{22pt}\selectfont
-			\@title\\
+			\textbf{\@title}\\
 			\vspace{1cm}\nointerlineskip
 			\fontsize{16pt}{16pt}\selectfont
 			\@titlealt\\
@@ -617,12 +617,8 @@
 			\vspace{1cm}\nointerlineskip
 			지~도~교~수~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(인)
 		\else % 대학원
-			\if@snu@ko
-				\fontsize{22pt}{22pt}\selectfont
-			\else
-				\fontsize{16pt}{16pt}\selectfont
-			\fi
-			\@title\\
+			\fontsize{22pt}{22pt}\selectfont
+			\textbf{\@title}\\
 			\vspace{1cm}\nointerlineskip
 			\fontsize{16pt}{16pt}\selectfont
 			\@titlealt\\
@@ -782,7 +778,7 @@
 			\normalfont
 			\linespread{1.0}
 			\fontsize{22pt}{22pt}\selectfont
-			\@title\par\nobreak
+			\textbf{\@title}\par\nobreak
 		}
 		\begin{flushright}
 		{%
