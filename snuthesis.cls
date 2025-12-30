@@ -767,7 +767,25 @@
 			\fontsize{22pt}{22pt}\selectfont
 			\textbf{\abstractname}\par\nobreak
 		}
-		\vspace{2cm}
+		\vspace{1cm}
+		{%
+			\centering
+			\normalfont
+			\linespread{1.0}
+			\fontsize{22pt}{22pt}\selectfont
+			\@title\par\nobreak
+		}
+		\begin{flushright}
+		{%
+		\linespread{1.3}
+			\fontsize{14pt}{14pt}
+			\selectfont
+			\@author \\
+			\@snu@department@en\\
+			The Graduate School\\
+			Seoul National University \\
+		}
+		\end{flushright}
 		\@afterheading
 	\fi
 }{%
