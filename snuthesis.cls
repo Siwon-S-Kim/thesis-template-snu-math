@@ -282,39 +282,62 @@
 %% 직접 고쳐준다.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	본문 여백 조정
+%	종이 크기는 달라도 여백은 동일했었던 듯 하여 통합 할 수 있도록 variable로 따로 빼냄
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\contenthorizontalmargin}
+\setlength{\contenthorizontalmargin}{30mm}
+\newlength{\contenttopmargin}
+\setlength{\contenttopmargin}{35mm}
+% \setlength{\contenttopmargin}{30mm}
+\newlength{\contentbottommargin}
+\setlength{\contentbottommargin}{30mm}
+% \setlength{\contentbottommargin}{35mm}
+
+% \setlength{\marginparwidth}{0mm}
+
 \if@snu@under
 	\setlength{\paperwidth}{210mm}
 	\setlength{\paperheight}{297mm}
-	\setlength{\textwidth}{160mm} %% 210 mm - (2.5 cm)*2
-	\setlength{\textheight}{232mm} %% 297 mm - 3 cm - 3.5 cm
+	% \setlength{\textwidth}{160mm} %% 210 mm - (2.5 cm)*2
+	% \setlength{\textheight}{232mm} %% 297 mm - 3 cm - 3.5 cm
 	% 좌우 여백 2.5 cm
 	% 상단 여백 3 cm, 하단 여백 3.5 cm
 \else
 	\if@snu@fsbp
 		\setlength{\paperwidth}{188mm}
 		\setlength{\paperheight}{258mm}
-		\setlength{\textwidth}{138mm} %% 188 mm - (2.5 cm)*2
-		\setlength{\textheight}{193mm} %% 258 mm - 3 cm - 3.5 cm
+		% \setlength{\textwidth}{138mm} %% 188 mm - (2.5 cm)*2
+		% \setlength{\textheight}{193mm} %% 258 mm - 3 cm - 3.5 cm
 	\else
 		\setlength{\paperwidth}{182mm}
 		\setlength{\paperheight}{257mm}
-		\setlength{\textwidth}{132mm} %% 182 mm - (2.5 cm)*2
-		\setlength{\textheight}{192mm} %% 257 mm - 3 cm - 3.5 cm
+		% \setlength{\textwidth}{132mm} %% 182 mm - (2.5 cm)*2
+		% \setlength{\textheight}{192mm} %% 257 mm - 3 cm - 3.5 cm
 	\fi
 	% 좌우 여백 2.5 cm
 	% 상단 여백 3 cm, 하단 여백 3.5 cm
 \fi
+% 2025년도 본문 여백 기준 좌우 30mm, 상단 15mm+20mm, 하단 15mm + 15mm
+\setlength{\textwidth}{\paperwidth} 
+\addtolength{\textwidth}{-2\contenthorizontalmargin}
+
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-\contenttopmargin}
+\addtolength{\textheight}{-\contentbottommargin}
+
 %% hoffset, voffset을 직접 바꾸면
 %% 일부 패키지와 잘 안 맞는다.
 %%\setlength{\hoffset}{-1in}
 %%\setlength{\voffset}{-1in}
-\setlength{\topmargin}{30mm}
+\setlength{\topmargin}{\contenttopmargin}
 \addtolength{\topmargin}{-1in}
 \setlength{\headheight}{0mm}
 \setlength{\headsep}{0mm} %% 헤더는 사용하지 않음.
-\addtolength{\marginparwidth}{-1.2cm} %% 안 중요함.
+\setlength{\marginparwidth}{0mm} %% 안 중요함. % add 에서 set 으로 수정
 %\setlength{\marginparsep}{3mm} %% 상관 없음.
-\setlength{\oddsidemargin}{25mm}
+\setlength{\oddsidemargin}{\contenthorizontalmargin}
 \addtolength{\oddsidemargin}{-1in}
 \setlength{\evensidemargin}{\oddsidemargin}
 \setlength{\footskip}{20mm} % 아래 page number 위치
@@ -463,9 +486,9 @@
 	\fi
 	%% 여백 재조정
 	\cleardoublepage
-	\addtolength{\textwidth}{10mm}
-	\addtolength{\oddsidemargin}{-5mm}
-	\addtolength{\evensidemargin}{-5mm}
+	% 2025 표지 상단 30mm 이기에 5mm 축소
+	\addtolength{\topmargin}{-5mm}
+	\addtolength{\textheight}{5mm}
 	\if@twocolumn \@restonecoltrue
 	\else \@restonecolfalse \fi
 	\onecolumn
@@ -549,9 +572,8 @@
 	%\end{minipage}
 	%% 여백 원래대로
 	\newpage
-	\addtolength{\textwidth}{-10mm}
-	\addtolength{\oddsidemargin}{5mm}
-	\addtolength{\evensidemargin}{5mm}
+	\addtolength{\topmargin}{5mm}
+	\addtolength{\textheight}{-5mm}
 	\if@restonecol \twocolumn \fi
 	\if@snu@cover@revert@ko
 		\@snu@kofalse
@@ -566,8 +588,11 @@
 %% 인준지 하단 여백 2 cm (15 mm 작음)
 \newlength{\@snu@approvaltextheight}
 \setlength{\@snu@approvaltextheight}{\textheight}
-%\addtolength{\@snu@approvaltextheight}{15mm}
-\addtolength{\@snu@approvaltextheight}{10mm} % modified at version 0.99
+% 왜 되는지 모르겠음 어느 경우이던 맞는 숫자가 아닌데 (맞는 숫자는 15mm 하단 20mm 상단 30mm 이기 때문에 각 10mm, 5mm 추가) 
+% twoside 일 경우 페이지가 넘어가버리면서 빈페이지 생성후 다음 페이지에 인준지가 실려 버리고
+% oneside 일 경우 그 다음 abstract의 내용이 \textheight 밖으로 넘처 흐름
+\if@twocolumn \esle \addtolength{\@snu@approvaltextheight}{5mm} \fi
+% \addtolength{\@snu@approvaltextheight}{15mm} % modified at version 0.99
 %% underline length
 \newlength{\committeenameunderlinelength}
 \setlength{\committeenameunderlinelength}{7cm}
@@ -586,8 +611,10 @@
 	\if@twocolumn \@restonecoltrue
 	\else \@restonecolfalse \fi
 	\onecolumn
+	% 2025 인준지 상단 30mm 이기에 5mm 축소
+	\addtolength{\topmargin}{-5mm}
 	%\enlargethispage{15mm}
-	\enlargethispage{10mm} % modified at version 0.99
+	% \enlargethispage{10mm} % modified at version 0.99
 	\thispagestyle{empty}
 	\noindent
 %	\begin{minipage}[][\textheight][s]{\textwidth}
@@ -663,6 +690,8 @@
 	}
 %	\end{minipage}
 	\newpage
+	%% 여백 원래대로
+	\addtolength{\topmargin}{5mm}
 	\if@restonecol \twocolumn \fi
 %% 참고사항
 %% center enviornment를 사용하면 하단 여백이 안 맞음.
