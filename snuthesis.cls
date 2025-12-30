@@ -105,6 +105,9 @@
 \newif\if@snu@ko %% true이면 국문 논문.
 \@snu@kofalse %% 기본값은 영문 논문.
 
+\newif\if@snu@cover@revert@ko
+\@snu@cover@revert@kofalse
+
 \newif\if@snu@indentfirst %% true이면 section의 첫 단락도 들여쓴다.
 \@snu@indentfirstfalse
 \newif\if@snu@indentoptionset
@@ -246,7 +249,7 @@
 	\newcommand{\studentnumbername}{Student Number}
 	\newcommand{\studentnumbernamealt}{학번}
 	%\newcommand{\abstractnamealt}{초록}
-	\newcommand{\abstractnamealt}{요약}
+	\newcommand{\abstractnamealt}{국문 초록}
 	\newcommand{\acknowledgementname}{Acknowledgements}
 \fi
 
@@ -455,6 +458,9 @@
 \setlength{\@snu@covertextheight}{\textheight}
 %\addtolength{\@snu@covertextheight}{5mm} % removed at version 0.99
 \newcommand{\makefrontcover}{%
+	% 영문일경우 함수 이내 강제 국문
+	\if@snu@ko \else \@snu@cover@revert@kotrue \@snu@kotrue
+	\fi
 	%% 여백 재조정
 	\cleardoublepage
 	\addtolength{\textwidth}{10mm}
@@ -547,6 +553,9 @@
 	\addtolength{\oddsidemargin}{5mm}
 	\addtolength{\evensidemargin}{5mm}
 	\if@restonecol \twocolumn \fi
+	\if@snu@cover@revert@ko
+		\@snu@kofalse
+	\fi
 %% 참고사항
 %% center enviornment를 사용하면 하단 여백이 안 맞음.
 %% 여백 설정이 조금만 어긋나면 페이지가 인쇄되지 않음.
