@@ -7,7 +7,7 @@
 % master : 석사
 % phd : 박사
 % openright : 챕터가 홀수쪽에서 시작
-\documentclass[oneside,phd]{snuthesis}
+\documentclass[4x6,twoside,phd]{snuthesis}
 
 \input{snutocstyle} % SNU toc style
 
@@ -37,7 +37,7 @@
 \usepackage{url}
 \usepackage{listings}
 \usepackage{footnote}
-\usepackage{algorithmic}
+% \usepackage{algorithmic}
 \usepackage{mathtools}
 \usepackage{caption}
 \usepackage{booktabs}
@@ -47,29 +47,25 @@
 \usepackage{tabularx}
 \usepackage[hidelinks]{hyperref}
 
-\newcommand{\hwkim}[1]{{\color{teal}{\small\bf\sf [HW: #1]}}}
-\newcommand{\new}[1]{#1}
 
 %% \title : 22pt로 나오는 큰 제목
 %% \title* : 16pt로 나오는 작은 제목
 \title{Your Ph.D. Thesis \\ Title}
 \title*{우리말 제목}
 
-\academicko{공학}
-\schoolen{COLLEGE OF ENGINEERING}
-% 2013학번까지 전기.컴퓨터공학부
-%\departmenten{Department of Electrical Engineering & Computer Science}
-%\departmentko{전기$\cdotp$컴퓨터 공학부}
-% 2014학번부터 컴퓨터공학부
-\departmenten{Department of Computer Science \& Engineering}
-\departmentko{컴퓨터공학부}
+\academicko{이학}
+\schoolen{College of Natural Sciences}
+
+\departmenten{Department of Mathematical Sciences}
+\departmentko{수리과학부}
 
 %% 저자 이름 Author's(Your) name
 \author{Your name}
-\author*{네~이~름} % Insert space for Hangul name.
+% 네이름 for compact writing mix ~ for space between each letter
+\author*{네이름} % Insert space for Hangul name.
 
 %% 학번 Student number
-\studentnumber{XXXX-XXXXX}
+\studentnumber{XXXX--XXXXX}
 
 %% 지도교수님 성함 Advisor's name
 %% (?) Use Korean name for Korean professor.
@@ -86,13 +82,15 @@
 %% (?) Use Korean date format.
 %% 컴공 논문 제본 요령: "논문심사계획"상의 심사용 논문제출기한이 속하는 연,월.
 %% 최초 심사용 논문을 제출하는 날이므로, 일반적으로 심사 학기 시작월.
-\submissiondate{2023~년~02~월}
+%% 2023년~05월 혹은 2023년~10월
+\submissiondate{2023년~05월}
 
 %% 논문 인준일 Approval date
 %% (?) Use Korean date format.
 %% 컴공 논문 제본 요령: "논문심사계획"상의 논문종심일이 속하는 연,월.
 %% 실제 인준지에 서명받은 날로 적으면 됨.
-\approvaldate{2023~년~05~월}
+%% 2025년~7월
+\approvaldate{2025년~12월}
 
 %% Note: 인준지의 교수님 성함은
 %% 컴퓨터로 출력하지 않고, 교수님께서
