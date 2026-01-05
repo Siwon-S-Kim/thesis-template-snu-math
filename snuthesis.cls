@@ -105,6 +105,9 @@
 \newif\if@snu@ko %% true이면 국문 논문.
 \@snu@kofalse %% 기본값은 영문 논문.
 
+\newif\if@snu@cover@revert@ko
+\@snu@cover@revert@kofalse
+
 \newif\if@snu@indentfirst %% true이면 section의 첫 단락도 들여쓴다.
 \@snu@indentfirstfalse
 \newif\if@snu@indentoptionset
@@ -246,7 +249,7 @@
 	\newcommand{\studentnumbername}{Student Number}
 	\newcommand{\studentnumbernamealt}{학번}
 	%\newcommand{\abstractnamealt}{초록}
-	\newcommand{\abstractnamealt}{요약}
+	\newcommand{\abstractnamealt}{국문 초록}
 	\newcommand{\acknowledgementname}{Acknowledgements}
 \fi
 
@@ -381,8 +384,8 @@
 \def\departmentko#1{\gdef\@snu@department@ko{#1}}
 \def\departmenten#1{\gdef\@snu@department@en{#1}}
 \def\@snu@department@ko{컴퓨터 공학부}
-\def\@snu@department@en{DEPARTMENT OF COMPUTER SCIENCE AND\\%
-	ENGINEERING}
+\def\@snu@department@en{Department of Computer Science and\\%
+	Engineering}
 %\@onlypreamble{\departmentko}
 %\@onlypreamble{\departmenten}
 
@@ -455,6 +458,9 @@
 \setlength{\@snu@covertextheight}{\textheight}
 %\addtolength{\@snu@covertextheight}{5mm} % removed at version 0.99
 \newcommand{\makefrontcover}{%
+	% 영문일경우 함수 이내 강제 국문
+	\if@snu@ko \else \@snu@cover@revert@kotrue \@snu@kotrue
+	\fi
 	%% 여백 재조정
 	\cleardoublepage
 	\addtolength{\textwidth}{10mm}
@@ -489,15 +495,15 @@
 		\else % 대학원
 			\fontsize{14pt}{14pt}\selectfont
 			\if@snu@ms
-				\@snu@koen{\@snu@academic@ko석사학위논문}%
+				\@snu@koen{\@snu@academic@ko석사 학위논문}%
 				{M.S. THESIS}\\
 			\else
-				\@snu@koen{\@snu@academic@ko박사학위논문}%
+				\@snu@koen{\@snu@academic@ko박사 학위논문}%
 				{Ph.D. DISSERTATION}\\
 			\fi
 			\vspace{2cm}\nointerlineskip
 			\fontsize{22pt}{22pt}\selectfont
-			\@title\\
+			\textbf{\@title}\\
 			\vspace{1cm}\nointerlineskip
 			\fontsize{16pt}{16pt}\selectfont
 			\@titlealt\\
@@ -523,7 +529,7 @@
 				\@authoralt
 			\else
 				\fontsize{14pt}{14pt}\selectfont
-				\@snu@department@en\\
+				\MakeUppercase{\@snu@department@en}\\
 				\@snu@school@en\\
 				\@snu@school@ensub \\
 				\vspace{1cm}\nointerlineskip
@@ -547,6 +553,9 @@
 	\addtolength{\oddsidemargin}{5mm}
 	\addtolength{\evensidemargin}{5mm}
 	\if@restonecol \twocolumn \fi
+	\if@snu@cover@revert@ko
+		\@snu@kofalse
+	\fi
 %% 참고사항
 %% center enviornment를 사용하면 하단 여백이 안 맞음.
 %% 여백 설정이 조금만 어긋나면 페이지가 인쇄되지 않음.
@@ -608,12 +617,8 @@
 			\vspace{1cm}\nointerlineskip
 			지~도~교~수~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(인)
 		\else % 대학원
-			\if@snu@ko
-				\fontsize{22pt}{22pt}\selectfont
-			\else
-				\fontsize{16pt}{16pt}\selectfont
-			\fi
-			\@title\\
+			\fontsize{22pt}{22pt}\selectfont
+			\textbf{\@title}\\
 			\vspace{1cm}\nointerlineskip
 			\fontsize{16pt}{16pt}\selectfont
 			\@titlealt\\
@@ -623,7 +628,7 @@
 			\vspace{5mm}\nointerlineskip
 			\fontsize{16pt}{16pt}\selectfont
 			이 논문을 %
-			\@snu@academic@ko\@snu@msphd{석사}{박사}%
+			\@snu@academic@ko\@snu@msphd{석사}{박사} %
 			학위논문으로 제출함\\
 			\vspace{5mm}\nointerlineskip
 			\fontsize{14pt}{14pt}\selectfont
@@ -639,7 +644,7 @@
 			\@authoralt\\
 			\vspace{1cm}\nointerlineskip
 			\@authoralt의 %
-			\@snu@academic@ko\@snu@msphd{석사}{박사} %
+			\@snu@msphd{석사}{박사} %
 			학위논문을 인준함\\
 			\vspace{5mm}\nointerlineskip
 			\fontsize{14pt}{14pt}\selectfont
@@ -767,7 +772,25 @@
 			\fontsize{22pt}{22pt}\selectfont
 			\textbf{\abstractname}\par\nobreak
 		}
-		\vspace{2cm}
+		\vspace{1cm}
+		{%
+			\centering
+			\normalfont
+			\linespread{1.0}
+			\fontsize{22pt}{22pt}\selectfont
+			\textbf{\@title}\par\nobreak
+		}
+		\begin{flushright}
+		{%
+		\linespread{1.3}
+			\fontsize{14pt}{14pt}
+			\selectfont
+			\@author \\
+			\@snu@department@en\\
+			The Graduate School\\
+			Seoul National University \\
+		}
+		\end{flushright}
 		\@afterheading
 	\fi
 }{%
